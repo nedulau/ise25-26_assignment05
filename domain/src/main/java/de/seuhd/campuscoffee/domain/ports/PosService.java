@@ -45,6 +45,8 @@ public interface PosService {
 
     // TODO: Add a new getByName method to enable fetching POS by name.
 
+    @NonNull Pos getByName(@NonNull String name) throws PosNotFoundException;
+
     /**
      * Creates a new POS or updates an existing one.
      * This method performs an "upsert" operation:

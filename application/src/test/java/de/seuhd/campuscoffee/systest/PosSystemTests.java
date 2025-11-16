@@ -24,6 +24,36 @@ public class PosSystemTests extends AbstractSysTest {
                 .isEqualTo(posToCreate);
     }
 
+    //@Test
+    // TODO: Uncomment this after implementing filtering by name.
+    /*
+    public static PosDto retrievePosByName(String name) {
+        return given()
+                .contentType(ContentType.JSON)
+                .queryParam("name", name)
+                .when()
+                .get("/api/pos/filter")
+                .then()
+                .statusCode(200)
+                .extract().as(PosDto.class);
+    }
+    */
+
+    @Test
+    void getPosByName() {
+        List<Pos> created = TestFixtures.createPosFixtures(posService);
+        Pos any = created.getFirst();
+
+        Pos retrieved = posDtoMapper.toDomain(
+                TestUtils.retrievePosByName(any.name())
+        );
+
+        assertThat(retrieved)
+                .usingRecursiveComparison()
+                .ignoringFields("createdAt", "updatedAt")
+                .isEqualTo(any);
+    }
+
     @Test
     void getAllCreatedPos() {
         List<Pos> createdPosList = TestFixtures.createPosFixtures(posService);
