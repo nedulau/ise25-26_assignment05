@@ -54,7 +54,6 @@ public class TestUtils {
                 .extract().as(PosDto.class);
     }
 
-    // TODO: Uncomment this after implementing filtering by name.
     public static PosDto retrievePosByName(String name) {
         return given()
                 .contentType(ContentType.JSON)
